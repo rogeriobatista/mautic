@@ -1,0 +1,9 @@
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.getJSON('https://lab.leoborlot.com.br/get_ip/index.php', function(data){
+            $("input[name='client_ip']").val(data.ip);
+        });
+    })
+</script>

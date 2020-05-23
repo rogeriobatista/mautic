@@ -3,27 +3,43 @@ $(document).ready(function() {
 	configWhatsAppValidator()
 	disableSubmitButton(true)
 
-	$('input[name="mauticform[telefone]"]').blur(function(e) {
-		const telefone = $('input[name="mauticform[telefone]"]').val()
-		if (telefone == '') return
+	const whatsapp = $('input[name="mauticform[whatsapp]"]')
+
+	whatsapp.blur(function(e) {
+
+		if (whatsapp.val() == '') {
+			disableSubmitButton(true)
+			return
+		}
 		$.ajax(
 		{
 			url:'https://api.wsapp.com.br/v1', type:'post', dataType:'json', contentType:'application/json',
-			data:JSON.stringify({ srv:'ISWHAVALID', phone:telefone.replace(/\D/g,'').trim() }),
+			data:JSON.stringify({ srv:'ISWHAVALID', phone:whatsapp.val().replace(/\D/g,'').trim() }),
 			beforeSend:function()
 			{
 				loader(true)
 			},
 			success:function(data)
 			{
-				if ( data.records[0].status == 'S' )
-				{
-					loader(false)
-					setStatusBorder(true)
-					disableSubmitButton(false)
-				}
-				else if ( data.records[0].status == 'N' || data.records[0].status == 'P' )
-				{
+				if (data.resultado == 1) {
+					if ( data.records[0].status == 'P' ) {
+						setTimeout(function() {
+							whatsapp.blur()
+						}, 5000);
+					}
+					else if ( data.records[0].status == 'S' )
+					{
+						loader(false)
+						setStatusBorder(true)
+						disableSubmitButton(false)
+					}
+					else if ( data.records[0].status == 'N' || data.records[0].status == 'P' )
+					{
+						loader(false)
+						setStatusBorder(false)
+						disableSubmitButton(true)
+					}
+				} else {
 					loader(false)
 					setStatusBorder(false)
 					disableSubmitButton(true)
@@ -35,7 +51,6 @@ $(document).ready(function() {
 	});
 
 	function configWhatsAppValidator() {
-		$('head').append('<link rel="stylesheet" type="text/css" href="loader.css" />')
 		$('body').append('<div id="loader"></div>')
 	}
 
@@ -45,9 +60,9 @@ $(document).ready(function() {
 
 	function setStatusBorder(status) {
 		if (status) {
-			$('input[name="mauticform[telefone]"]').siblings('.mauticform-errormsg').first().hide()
+			whatsapp.siblings('.mauticform-errormsg').first().hide()
 		} else {
-			$('input[name="mauticform[telefone]"]').siblings('.mauticform-errormsg').first().show()
+			whatsapp.siblings('.mauticform-errormsg').first().show()
 		}
 	}
 

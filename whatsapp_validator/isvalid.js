@@ -5,12 +5,15 @@ $(document).ready(function() {
 
 	const whatsapp = $('input[name="mauticform[whatsapp]"]')
 
-	whatsapp.blur(function(e) {
+	whatsapp.keyup(function(e) {
 
-		if (whatsapp.val() == '') {
+		console.log(whatsapp.val().length)
+
+		if (whatsapp.val().length < 11) {
 			disableSubmitButton(true)
-			return
+			return;
 		}
+
 		$.ajax(
 		{
 			url:'https://api.wsapp.com.br/v1', type:'post', dataType:'json', contentType:'application/json',

@@ -34,7 +34,7 @@ if (!$_SESSION['logged'])
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Import Form -->
-                <form action="controllers/import.php" method="post" enctype="multipart/form-data">
+                <form action="/controllers/import.php" method="post" enctype="multipart/form-data">
                     <div class="mt-4 mb-3">
                         <h4>Select a CSV file from your computer</h4>
                     </div>
@@ -44,9 +44,9 @@ if (!$_SESSION['logged'])
                         <input type="file" name="file">
                     </span>
                     <div class="mt-3 mb-3">
-                        <button type="button" class="btn btn-primary start" data-ng-click="submit()">
+                        <button type="button" class="btn btn-primary start">
                             <i class="glyphicon glyphicon-upload"></i>
-                            <span>Start</span>
+                            <span>Upload</span>
                         </button>
                         <button type="reset" class="btn btn-danger cancel">
                             <i class="glyphicon glyphicon-ban-circle"></i>

@@ -11,6 +11,9 @@ if (!$_SESSION['logged'])
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
         <!-- Custom Style -->
         <link rel="stylesheet" href="assets/css/style.css"/>
     </head>
@@ -34,22 +37,32 @@ if (!$_SESSION['logged'])
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Import Form -->
-                <form action="/controllers/import.php" method="post" enctype="multipart/form-data">
+                <form action="controllers/import.php" method="post" enctype="multipart/form-data">
+                    <h4 class="mt-4 mb-3">Upload CSV File</h4>
                     <div class="mt-4 mb-3">
-                        <h4>Select a CSV file from your computer</h4>
+                        <span>Select a CSV file</span>
+                        <span class="btn btn-success">
+                            <input type="file" name="file" required>
+                        </span>
                     </div>
-                    <span class="btn btn-success fileinput-button">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        <span>Add files</span>
-                        <input type="file" name="file">
-                    </span>
+                    <div class="mt-4 mb-3" style="width: 330px; margin-left: auto; margin-right: auto;">
+                        <span>Select the CSV Source</span>
+                        <select name="source" class="form-control" required>
+                            <option value="rd-station">RD Station</option>
+                            <option value="klick-send">Klick Send</option>
+                        </select>
+                    </div>
+                    <div class="mt-4 mb-3" style="width: 330px; margin-left: auto; margin-right: auto;">
+                        <span>Separator</span>
+                        <input name="separator" class="form-control" required>
+                    </div>
                     <div class="mt-3 mb-3">
-                        <button type="button" class="btn btn-primary start">
-                            <i class="glyphicon glyphicon-upload"></i>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload"></i>
                             <span>Upload</span>
                         </button>
-                        <button type="reset" class="btn btn-danger cancel">
-                            <i class="glyphicon glyphicon-ban-circle"></i>
+                        <button type="reset" class="btn btn-danger">
+                            <i class="fa fa-ban"></i>
                             <span>Cancel</span>
                         </button>
                     </div>

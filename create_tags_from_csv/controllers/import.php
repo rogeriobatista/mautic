@@ -28,9 +28,6 @@ $filename = $_FILES["file"]["tmp_name"];
 $separator = $_POST['separator'];
 $source = $_POST['source'];
 
-if (!isset($separator) || !isset($source))
-    die();
-
 if($_FILES["file"]["size"] > 0)
 {
     $file = fopen($filename, "r");

@@ -15,11 +15,14 @@ $(document).ready(function() {
         $('#upload-status').html('<span>Starting</span>')
 
         setInterval(function() {
-            $.getJSON('status.json', function(data) {
-                const total = data.length
-                const email = data[total - 1]
-                $('#upload-status').html(`<span>Processed itens: ${total} <br /> Last Processed Email: ${email}</span>`)
+            $.get('controllers/status.php', function(response) {
+                const status = JSON.parse(response)
+                updateStatus(status)
             })
         }, 2000)
+    }
+
+    function updateStatus(status) {
+        $('#upload-status').html(`<span>Processed itens: ${status.total} <br /> Last Processed Email: ${status.email}</span>`)
     }
 });

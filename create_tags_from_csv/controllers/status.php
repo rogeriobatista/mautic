@@ -5,4 +5,4 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 $content = json_decode(file_get_contents('../status.json'),TRUE);
 
-echo json_encode(array('total' => count($content), 'email' => $content[count($content)]));
+echo json_encode(array('total' => count($content), 'email' => $content[count($content) - 1]));

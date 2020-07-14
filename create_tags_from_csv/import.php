@@ -2,7 +2,7 @@
 session_start();
 
 if (!$_SESSION['logged'])
-    header('Location: /index.php');
+    header('Location: /tag-import/index.php');
 ?>
 <html>
     <head>
@@ -28,7 +28,7 @@ if (!$_SESSION['logged'])
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/controllers/logout.php">Sign out</a>
+                        <a class="nav-link" href="/tag-import/controllers/logout.php">Sign out</a>
                     </li>
                 </ul>
             </div>

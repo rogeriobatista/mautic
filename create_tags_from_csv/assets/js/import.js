@@ -23,6 +23,7 @@ $(document).ready(function() {
     }
 
     function updateStatus(status) {
-        $('#upload-status').html(`<span>Processed itens: ${status.total} <br /> Last Processed Email: ${status.email}</span>`)
+        const { total, email } = status;
+        $('#upload-status').html(`<span>Processed itens: ${total} <br /> Last Processed Email: ${email}</span>`)
     }
 });

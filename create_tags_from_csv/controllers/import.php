@@ -49,7 +49,7 @@ if($_FILES["file"]["size"] > 0)
     clearStatusFile();
 }
 
-header('Location: /import.php');
+header('Location: /tag-import/import.php');
 
 function createTag($data, $tagIndex, $emailIndex, $array_separator) {
     global $api;

@@ -27,17 +27,17 @@ $api = new Mautic\MauticApi();
 $filename = $_FILES["file"]["tmp_name"];
 $separator = $_POST['separator'];
 $source = $_POST['source'];
+$index = 0;
 
 if($_FILES["file"]["size"] > 0)
 {
     $file = fopen($filename, "r");
-    $index = 0;
     while (($getData = fgetcsv($file, 10000, $separator)) !== FALSE)
     {
         if ($index > 0) {
             switch($source) {
-                case 'rd-station' : createTag($getData, 4, 0, ','); break;
-                case 'klick-send' : createTag($getData, 4, 0, ';'); break;
+                case 'rd-station' : writeStatus($getData[0]); createTag($getData, 4, 0, ','); break;
+                case 'klick-send' : writeStatus($getData[0]); createTag($getData, 4, 0, ';'); break;
             }
         }
 
@@ -45,6 +45,8 @@ if($_FILES["file"]["size"] > 0)
     }
     
     fclose($file);
+
+    clearStatusFile();
 }
 
 header('Location: /import.php');
@@ -75,4 +77,26 @@ function createTag($data, $tagIndex, $emailIndex, $array_separator) {
     ];
     $createIfNotFound = false;
     $contact = $contactApi->edit($contactId, $data, $createIfNotFound);
+}
+
+function writeStatus($email) {
+    $content = readStatusFile();
+
+    if ($content) {
+        array_push($content, $email);
+    } else {
+        $content = array($email);
+    }
+    file_put_contents('../status.json', json_encode($content));
+}
+
+function readStatusFile() {
+    global $index;
+
+    if ($index > 1)
+        return json_decode(file_get_contents('../status.json'),TRUE);
+}
+
+function clearStatusFile() {
+    file_put_contents('../status.json', json_encode([]));
 }

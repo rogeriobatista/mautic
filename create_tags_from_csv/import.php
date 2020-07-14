@@ -37,7 +37,7 @@ if (!$_SESSION['logged'])
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Import Form -->
-                <form action="controllers/import.php" method="post" enctype="multipart/form-data">
+                <form action="controllers/import.php" method="post" enctype="multipart/form-data" id="form-upload">
                     <h4 class="mt-4 mb-3">Upload CSV File</h4>
                     <div class="mt-4 mb-3">
                         <span>Select a CSV file</span>
@@ -57,14 +57,16 @@ if (!$_SESSION['logged'])
                         <input name="separator" class="form-control" required>
                     </div>
                     <div class="mt-3 mb-3">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" id="btn-upload">
                             <i class="fas fa-upload"></i>
                             <span>Upload</span>
                         </button>
-                        <button type="reset" class="btn btn-danger">
+                        <button type="reset" class="btn btn-danger" id="btn-reset-upload">
                             <i class="fa fa-ban"></i>
                             <span>Cancel</span>
                         </button>
+                    </div>
+                    <div class="mt-3 mb-3 hide" id="upload-status">
                     </div>
                 </form>
             </div>
@@ -77,5 +79,8 @@ if (!$_SESSION['logged'])
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <!-- Import -->
+        <script src="assets/js/import.js"></script>
     </body>
 </html>
